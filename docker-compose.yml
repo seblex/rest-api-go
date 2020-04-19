@@ -1,0 +1,42 @@
+version: "3.5"
+
+services:
+  # APISever
+  api-server:
+    container_name: api-server
+    build:
+      context: ./
+    expose:
+      - "8020"
+    depends_on:
+      - api-server-pg
+      - api-server-pg-test
+    ports:
+      - "8020:8020"
+    networks:
+      - default
+      - dev-network
+    tty: true
+
+  # Postgres
+  api-server-pg:
+    container_name: api-server-pg
+    build:
+      context: ./.docker/pg
+    environment:
+      POSTGRES_DB: 'restapi_dev'
+      POSTGRES_USER: 'dev'
+      POSTGRES_PASSWORD: 'dev'
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "54329:5432"
+    networks:
+      - default
+      - dev-network
+    expose:
+      - "5432"
+
+networks:
+  dev-network:
+    external:
+      name: dev-network

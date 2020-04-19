@@ -2,6 +2,7 @@ package apiserver
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/seblex/rest-api-go/internal/app/store"
 	"github.com/sirupsen/logrus"
 	"io"
 	"net/http"
@@ -12,6 +13,7 @@ type APIServer struct{
 	config *Config
 	logger *logrus.Logger
 	router *mux.Router
+	store *store.Store
 }
 
 // New ...
@@ -31,6 +33,11 @@ func (s *APIServer) Start() error {
 	}
 
 	s.configureRouter()
+
+	err = s.configureStore()
+	if err != nil {
+		return err
+	}
 
 	s.logger.Info("Starting API server")
 
@@ -52,6 +59,18 @@ func (s *APIServer) configureLogger() error {
 // Configure router ...
 func (s *APIServer) configureRouter() {
 	s.router.HandleFunc("/hello", s.handleHello())
+}
+
+// Configure store ...
+func (s *APIServer) configureStore() error {
+	st := store.New(s.config.Store)
+	err := st.Open()
+	if err != nil {
+		return err
+	}
+
+	s.store = st
+	return nil
 }
 
 // Handler: hello ...
