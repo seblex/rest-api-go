@@ -14,6 +14,7 @@ require (
 	github.com/cznic/strutil v0.0.0-20181122101858-275e90344537 // indirect
 	github.com/cznic/zappy v0.0.0-20181122101859-ca47d358d4b1 // indirect
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
+	github.com/go-ozzo/ozzo-validation/v4 v4.1.0
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/golang-migrate/migrate v3.5.4+incompatible // indirect
 	github.com/google/go-github v17.0.0+incompatible // indirect
@@ -24,5 +25,6 @@ require (
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/sirupsen/logrus v1.5.0
 	github.com/stretchr/testify v1.5.1
+	golang.org/x/crypto v0.0.0-20200420201142-3c4aac89819a
 	golang.org/x/sys v0.0.0-20200413165638-669c56c373c4 // indirect
 )
